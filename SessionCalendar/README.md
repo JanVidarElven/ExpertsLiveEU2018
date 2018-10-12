@@ -24,7 +24,7 @@ This solution requires:
 ## Usage
 
 1. Run the CalendarGraphApi_Setup.ps1 script as a global admin or application administrator to create the app registration.
-1. Run the script and specify parameters like .\RetrieveSessionsAndAddAppointmentsViaGraph.ps1 -User "yourname@domain.com" -ClientId "your-clientid-or-well-known-clientid"
+1. Run the script and specify parameters like .\RetrieveSessionsAndAddAppointmentsViaGraph.ps1 -User "yourname@domain.com" -ClientId "your-clientid-from-app-registration"
 
 ## Known Issues
 The script will only add the sessions if they are not already there, so you can run the script multiple times in case there are any description, rooms, or other updates. Some session titles contains some punctuation or dash characters making the JSON updates to calendar and matching with existing events difficult. So these sessions are added as new each time even though they are there from before. I'll try to fix it, and commit to this solution, but you are welcome to contribute to this GitHub project ;)
