@@ -1,0 +1,10 @@
+{ 
+    "invitedUserDisplayName": "Display Name", 
+    "invitedUserEmailAddress": "alias@domain.com", 
+    "invitedUserMessageInfo": {
+        "messageLanguage": "en-US",
+        "customizedMessageBody": "custom string"
+     },
+    "sendInvitationMessage": false, 
+    "inviteRedirectUrl": "string" 
+} 
