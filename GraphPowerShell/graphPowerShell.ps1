@@ -7,9 +7,9 @@
 # --------------------------------------------------------------------------------------------------------
 
 # User for Delegated Permission
-$User = ""
+$User = "jan.vidar@elven.no"
 # Azure AD App Registration
-$ClientId = ""
+$ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
 # Well known Client Id for Intune PowerShell:
 #$clientId = "d1ddf0e4-d672-4dae-b554-9d5bdfd93547"
 # Well known Client Id for Azure PowerShell:
@@ -144,6 +144,8 @@ $global:authToken = Get-AuthToken -User $User -ClientId $ClientId
 
 #endregion
 
+# The commands under uses the $authToken Authorization in the Header
+
 # 1. Some different Graph URI Endpoints for listing User objects
 # All Users from a Department
 $userlisttURI = "https://graph.microsoft.com/v1.0/users?`$filter=Department eq 'Seinfeld'"
@@ -153,7 +155,7 @@ $userlisttURI = "https://graph.microsoft.com/v1.0/users?`$filter=userType eq 'Me
 $userlisttURI = "https://graph.microsoft.com/v1.0/users?`$top=5"
 
 # 2. Get the User objects via an authenticated request to Graph API with the help of Bearer Token in authorization header
-$graphResponseUsers = Invoke-RestMethod -Method Get -Uri $userlisttURI -Headers @{"Authorization"="Bearer $accessToken"}  
+$graphResponseUsers = Invoke-RestMethod -Method Get -Uri $userlisttURI -Headers @{"Authorization"=$authToken.Authorization}  
 
 # 3. Loop through PowerShell object returned from Graph query
 foreach ($user in $graphResponseUsers.value)
@@ -174,7 +176,7 @@ if ($graphresponseusers.'@odata.nextLink'){
     do
         {
 
-            $moregraphresponseusers = Invoke-RestMethod -Method Get -Uri $moregraphresponseusers.'@odata.nextLink' -Headers @{"Authorization"="Bearer $accessToken"}
+            $moregraphresponseusers = Invoke-RestMethod -Method Get -Uri $moregraphresponseusers.'@odata.nextLink' -Headers @{"Authorization"=$authToken.Authorization}
 
             $numberOfUsers += $moregraphresponseusers.value.count
             Write-Host $moregraphresponseusers.value.count ".. more objects --> " $numberOfUsers " .. total .." -ForegroundColor Blue
@@ -192,7 +194,7 @@ if ($graphresponseusers.'@odata.nextLink'){
 $managedAppsURI = "https://graph.microsoft.com/beta/deviceAppManagement/managedAppRegistrations"
 
 # 6. Get the managed apps objects via an authenticated request to Graph API with the help of Bearer Token in authorization header
-$graphResponseManagedApps = Invoke-RestMethod -Method Get -Uri $managedAppsURI -Headers @{"Authorization"="Bearer $accessToken"}  
+$graphResponseManagedApps = Invoke-RestMethod -Method Get -Uri $managedAppsURI -Headers @{"Authorization"=$authToken.Authorization}  
 
 # 7. Loop through Managed App registrations
 foreach ($managedApp in $graphResponseManagedApps.value)
@@ -203,6 +205,6 @@ foreach ($managedApp in $graphResponseManagedApps.value)
     Write-Host "Mobile App: " $managedApp.appIdentifier.bundleId -ForegroundColor Green
     $userId = $managedApp.userId
     $userRegisteredURI = "https://graph.microsoft.com/v1.0/users?`$filter=id eq '$userId'&`$select=displayName"
-    $graphResponseUserRegistered = Invoke-RestMethod -Method Get -Uri $userRegisteredURI -Headers @{"Authorization"="Bearer $accessToken"}  
+    $graphResponseUserRegistered = Invoke-RestMethod -Method Get -Uri $userRegisteredURI -Headers @{"Authorization"=$authToken.Authorization}  
     Write-Host "User Registered: " $graphResponseUserRegistered.value.displayName -ForegroundColor Yellow
 }

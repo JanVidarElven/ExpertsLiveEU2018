@@ -23,9 +23,9 @@ https://graph.microsoft.com/beta/users/?$filter=userType eq 'Guest'&$select=exte
 
 https://graph.microsoft.com/beta/me/joinedTeams
 
-https://graph.microsoft.com/beta/teams/{team-id}/channels
+https://graph.microsoft.com/beta/teams/afc66135-9de5-47a8-9ee5-5b9ca3fb414c/channels
 
-https://graph.microsoft.com/beta/teams/{team-id}/channels/{channel-id}/chatThreads
+https://graph.microsoft.com/beta/teams/afc66135-9de5-47a8-9ee5-5b9ca3fb414c/channels/19:17d3e6746bff40919f19a5b07fff65ce@thread.skype/chatThreads
 
 https://graph.microsoft.com/beta/users/?$filter=userType eq 'Guest'&$select=externalUserState,externalUserStateChangeDateTime,UserType
 
