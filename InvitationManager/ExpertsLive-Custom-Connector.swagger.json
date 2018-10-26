@@ -1,0 +1,277 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ExpertsLive Custom Connector",
+    "description": "",
+    "version": "1.0"
+  },
+  "host": "graph.microsoft.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/beta/invitations": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "inviteRedeemUrl": {
+                  "type": "string",
+                  "description": "inviteRedeemUrl"
+                },
+                "invitedUserDisplayName": {
+                  "type": "string",
+                  "description": "invitedUserDisplayName"
+                },
+                "invitedUserType": {
+                  "type": "string",
+                  "description": "invitedUserType"
+                },
+                "invitedUserEmailAddress": {
+                  "type": "string",
+                  "description": "invitedUserEmailAddress"
+                },
+                "sendInvitationMessage": {
+                  "type": "boolean",
+                  "description": "sendInvitationMessage"
+                },
+                "inviteRedirectUrl": {
+                  "type": "string",
+                  "description": "inviteRedirectUrl"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                },
+                "invitedUserMessageInfo": {
+                  "type": "object",
+                  "properties": {
+                    "messageLanguage": {
+                      "type": "string",
+                      "description": "messageLanguage"
+                    },
+                    "customizedMessageBody": {
+                      "type": "string",
+                      "description": "customizedMessageBody"
+                    },
+                    "ccRecipients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "emailAddress": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "name"
+                              },
+                              "address": {
+                                "type": "string",
+                                "description": "address"
+                              }
+                            },
+                            "description": "emailAddress"
+                          }
+                        }
+                      },
+                      "description": "ccRecipients"
+                    }
+                  },
+                  "description": "invitedUserMessageInfo"
+                },
+                "invitedUser": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    }
+                  },
+                  "description": "invitedUser"
+                }
+              }
+            }
+          }
+        },
+        "summary": "InviteB2BUser",
+        "description": "Invite a Azure AD B2B User",
+        "operationId": "InviteB2BUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "invitedUserDisplayName": {
+                  "type": "string",
+                  "description": "invitedUserDisplayName"
+                },
+                "invitedUserEmailAddress": {
+                  "type": "string",
+                  "description": "invitedUserEmailAddress"
+                },
+                "invitedUserMessageInfo": {
+                  "type": "object",
+                  "properties": {
+                    "messageLanguage": {
+                      "type": "string",
+                      "description": "messageLanguage"
+                    },
+                    "ccRecipients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "emailAddress": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "name"
+                              },
+                              "address": {
+                                "type": "string",
+                                "description": "address"
+                              }
+                            },
+                            "description": "emailAddress"
+                          }
+                        }
+                      },
+                      "description": "ccRecipients"
+                    },
+                    "customizedMessageBody": {
+                      "type": "string",
+                      "description": "customizedMessageBody"
+                    }
+                  },
+                  "description": "invitedUserMessageInfo"
+                },
+                "sendInvitationMessage": {
+                  "type": "boolean",
+                  "description": "sendInvitationMessage"
+                },
+                "inviteRedirectUrl": {
+                  "type": "string",
+                  "description": "inviteRedirectUrl"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/beta/teams/afc66135-9de5-47a8-9ee5-5b9ca3fb414c/channels/19:17d3e6746bff40919f19a5b07fff65ce@thread.skype/chatThreads": {},
+    "/beta/teams/{teamId}/channels/{channelId}/chatThreads": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateTeamChat",
+        "description": "Creates a Team Chat Message",
+        "operationId": "CreateTeamChat",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rootMessage": {
+                  "type": "object",
+                  "properties": {
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "contentType": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "contentType"
+                        },
+                        "content": {
+                          "type": "string",
+                          "description": "content"
+                        }
+                      },
+                      "description": "body"
+                    }
+                  },
+                  "description": "rootMessage"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.windows.net/common/oauth2/authorize",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {}
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": []
+    }
+  ],
+  "tags": []
+}
