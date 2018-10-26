@@ -24,7 +24,7 @@ $graphPrincipal.Oauth2Permissions
 $graphDelegatedPermissions = $graphPrincipal.Oauth2Permissions | Where-Object {$_.Value -like 'DeviceManagement*'}
 
 # Example: Get all Guest Invite permissions
-$graphDelegatedPermissions = $graphPrincipal.Oauth2Permissions | Where-Object {$_.Value -like 'DeviceManagement*'}
+$graphDelegatedPermissions = $graphPrincipal.Oauth2Permissions | Where-Object {$_.Value -like 'User.Invite*'}
 
 # Loop through and assign all delegated permissions
 ForEach ($graphPermission in $graphDelegatedPermissions ) {
