@@ -405,6 +405,16 @@ foreach ($Session in $Sessions)
 
 "@
 
+    # Alt 2: Build a Hash object for adding/updating calendar event, to later be converted to JSON
+    $Hash_Calendar = @{subject=$title}
+    $Hash_Calendar += @{body=@{contentType='HTML'; content=$Description}} 
+    $Hash_Calendar += @{start=@{dateTime=$starttime; timeZone="W. Europe Standard Time"}} 
+    $Hash_Calendar += @{end=@{dateTime=$endtime; timeZone='W. Europe Standard Time'}} 
+    $Hash_Calendar += @{location=@{displayName=$location}}
+    $Hash_Calendar += @{reminderMinutesBeforeStart=15;isReminderOn=$true;iCalUId=$guid}
+
+    $JSON_Calendar = $Hash_Calendar | ConvertTo-Json
+
     # Check if session title already exists
     If ($filterSession = $sessionEvents.value | Where-Object {$_.subject -match $title}) {
         Write-Host "Session $title already exists in calendar, updating..."

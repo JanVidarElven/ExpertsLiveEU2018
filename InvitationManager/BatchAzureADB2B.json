@@ -1,0 +1,49 @@
+{
+    "requests": [
+      {
+        "url": "/invitations",
+        "method": "POST",
+        "id": "1",
+        "body": {
+                "invitedUserDisplayName": "Jan Vidar Elven (Gmail)",
+                "invitedUserEmailAddress": "jan.vidar.elven@gmail.com",
+                "invitedUserMessageInfo": {
+                  "messageLanguage": "en-US",
+                  "ccRecipients": [
+                    {
+                      "emailAddress": {
+                        "name": "jan.vidar@elven.no",
+                        "address": "jan.vidar@elven.no"
+                      }
+                    }
+                  ],
+                  "customizedMessageBody": "Welcome to the Elven Experts Team!"
+                },
+                "sendInvitationMessage": true,
+                "inviteRedirectUrl": "https://teams.microsoft.com"
+                },
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      {
+        "url": "/teams/afc66135-9de5-47a8-9ee5-5b9ca3fb414c/channels/19:58b9c500cce74e5485d4a1e34f48b842@thread.skype/chatThreads",
+        "method": "POST",
+        "id": "2",
+        "body": {
+            "rootMessage": {
+                "body": {
+                  "contentType": 2,
+                  "content": "Hello Experts Live Europe! Graph is awesome!"
+                }
+              }
+            },
+            "headers": {
+            "Content-Type": "application/json"
+            },
+        "DependsOn": [
+          "1"
+        ]
+      }
+    ]
+  }
