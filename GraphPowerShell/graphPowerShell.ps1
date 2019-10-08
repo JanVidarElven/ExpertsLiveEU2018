@@ -9,12 +9,13 @@
 # User for Delegated Permission
 $User = "jan.vidar@elven.no"
 # Azure AD App Registration
-$ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
+#$ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
 # Well known Client Id for Intune PowerShell:
-#$clientId = "d1ddf0e4-d672-4dae-b554-9d5bdfd93547"
+$clientId = "d1ddf0e4-d672-4dae-b554-9d5bdfd93547"
 # Well known Client Id for Azure PowerShell:
 #$ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
-
+# Optionally Specify Tenant
+#$Tenant = "elven.onmicrosoft.com"
 
 # Get-AuthToken function, from Intune Graph API samples
 function Get-AuthToken {
@@ -38,7 +39,9 @@ function Get-AuthToken {
         $ClientId
     )
     $userUpn = New-Object "System.Net.Mail.MailAddress" -ArgumentList $User
-    $tenant = $userUpn.Host
+    If ($Tenant -eq $null) {
+        $Tenant = $userUpn.Host
+    }
     
     Write-Host "Checking for AzureAD module..."
         $AadModule = Get-Module -Name "AzureAD" -ListAvailable
